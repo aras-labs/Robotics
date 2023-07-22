@@ -1,3 +1,4 @@
-# Robotics [![Open in MATLAB Online](https://matlab.mathworks.com/matlabcentral/mlc-downloads/downloads/your-repo-url/openInMATLAB.png)](https://matlab.mathworks.com/)
+# Robotics 
 
 Robotics Book - Parallel Robots: Mechanics and Control Book
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=https://github.com/aras-labs/Robotics&project=MY_REPO.prj)
