@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB 2022a"><title>This program defines the Denavit-Hartenberg (DH) transformation matrix.</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S1 { margin: 15px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(192, 76, 11); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
+.CodeBlock { background-color: #F5F5F5; margin: 10px 0 10px 0; }
+.S2 { border-left: 1px solid rgb(191, 191, 191); border-right: 1px solid rgb(191, 191, 191); border-top: 1px solid rgb(191, 191, 191); border-bottom: 0px none rgb(33, 33, 33); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S3 { border-left: 1px solid rgb(191, 191, 191); border-right: 1px solid rgb(191, 191, 191); border-top: 0px none rgb(33, 33, 33); border-bottom: 0px none rgb(33, 33, 33); border-radius: 0px; padding: 0px 45px 0px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S4 { border-left: 1px solid rgb(191, 191, 191); border-right: 1px solid rgb(191, 191, 191); border-top: 0px none rgb(33, 33, 33); border-bottom: 1px solid rgb(191, 191, 191); border-radius: 0px 0px 4px 4px; padding: 0px 45px 4px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }</style></head><body><div class = rtcContent><div  class = 'S0'><span style=' font-weight: bold;'>An Introduction to Robotics, By Prof. Hamid D. Taghirad &amp; Mohammad A. Khosravi Copyright ARAS @2023</span></div><h1  class = 'S1'><span>This program defines the Denavit-Hartenberg (DH) transformation matrix.</span></h1><div  class = 'S0'><span></span></div><div  class = 'S0'><span>  Inputs:</span></div><div  class = 'S0'><span>  - a: The link length (length between the Z axes)</span></div><div  class = 'S0'><span>  - alpha: The link twist (rotation about the X axes)</span></div><div  class = 'S0'><span>  - d: The link offset (distance between the X axes)</span></div><div  class = 'S0'><span>  - theta: The joint angle (rotation about the Z axes)</span></div><div  class = 'S0'><span></span></div><div  class = 'S0'><span>  Output:</span></div><div  class = 'S0'><span>  - T: The DH transformation matrix corresponding to the given parameters.</span></div><div  class = 'S0'><span></span></div><div  class = 'S0'><span>  Note: The DH convention is commonly used in robotics to model the kinematics </span></div><div  class = 'S0'><span>  of robot manipulators. This function calculates the 4x4 transformation matrix </span></div><div  class = 'S0'><span>  based on the DH parameters, which can be used to determine the position and </span></div><div  class = 'S0'><span>  orientation of a robot's end-effector relative to its base frame.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre"><span style="color: rgb(14, 0, 255);">function </span><span >[T] = DH(a, alpha, d, theta)</span></span></div></div><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre"><span >    </span><span style="color: rgb(0, 128, 19);">% Calculate the DH transformation matrix using the provided DH parameters.</span></span></div></div><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre"><span >    T = [cos(theta) -sin(theta) * cos(alpha) sin(theta) * sin(alpha) a * cos(theta); </span><span style="color: rgb(14, 0, 255);">...</span></span></div></div><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre"><span >         sin(theta) cos(theta) * cos(alpha) -cos(theta) * sin(alpha) a * sin(theta); </span><span style="color: rgb(14, 0, 255);">...</span></span></div></div><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre"><span >         0 sin(alpha) cos(alpha) d; </span><span style="color: rgb(14, 0, 255);">...</span></span></div></div><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre"><span >         0 0 0 1];</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre"><span style="color: rgb(14, 0, 255);">end</span></span></div></div></div>
+<br>
+<!-- 
+##### SOURCE BEGIN #####
+function [T] = DH(a, alpha, d, theta)
+%  DH *An Introduction to Robotics, By Prof. Hamid D. Taghirad & Mohammad A. Khosravi 
+% Copyright ARAS @2023*
+%% This program defines the Denavit-Hartenberg (DH) transformation matrix.
+% 
+% 
+% Inputs:
+% 
+% - a: The link length (length between the Z axes)
+% 
+% - alpha: The link twist (rotation about the X axes)
+% 
+% - d: The link offset (distance between the X axes)
+% 
+% - theta: The joint angle (rotation about the Z axes)
+% 
+% 
+% 
+% Output:
+% 
+% - T: The DH transformation matrix corresponding to the given parameters.
+% 
+% 
+% 
+% Note: The DH convention is commonly used in robotics to model the kinematics 
+% 
+% of robot manipulators. This function calculates the 4x4 transformation matrix 
+% 
+% based on the DH parameters, which can be used to determine the position and 
+% 
+% orientation of a robot's end-effector relative to its base frame.
+    % Calculate the DH transformation matrix using the provided DH parameters.
+    T = [cos(theta) -sin(theta) * cos(alpha) sin(theta) * sin(alpha) a * cos(theta); ...
+         sin(theta) cos(theta) * cos(alpha) -cos(theta) * sin(alpha) a * sin(theta); ...
+         0 sin(alpha) cos(alpha) d; ...
+         0 0 0 1];
+end
+##### SOURCE END #####
+-->
+</div></body></html>
