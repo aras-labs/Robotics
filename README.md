@@ -10,8 +10,8 @@ This repository contains code and resources related to two robotics books.
 
 This book provides a comprehensive introduction to robotics concepts and techniques.
 
-### 2. Parallel Robots: Mechanics and Control (1st ed.)
-**Author:** H.D. Taghirad  
+### 2. Parallel Robots: Mechanics and Control 
+**Author:** Prof. Hamid D. Taghirad
 **Copyright:** CRC Press, 2013  
 **DOI:** [10.1201/b16096](https://doi.org/10.1201/b16096)
 
