@@ -1,0 +1,209 @@
+%% 
+%   Parallel Robots: Mechanics and Control
+%   Copyright Hamid D. Taghirad 2013
+%
+%   This program solves the forward dynamics of 
+%   the planar cable manipulator: variable mass approach
+%   using implicit Newton-Euler formulation for a typical trajectory.
+%
+%%
+clear all;
+
+global Par      % Use all parameters in a Global Structure
+%   initialize the simulation parameters
+deg2rad=pi/180;
+rad2deg=180/pi;
+t0=0; tf=200;
+tspan=[t0 tf];
+% The orientation of Ai, Bi, ai, and bi's in its at central position
+Par.Ath=[-135;-45;45;135]*deg2rad; 
+Par.Bth=[-45;-135;135;45]*deg2rad;
+Par.pert=1.0;                % {ertutbation for parameters
+Par.RA=900;                  % the Ai's circle radius 
+Par.RB=10;                   % the Bi's circle radius 
+Par.M=2500;                  % The Mass of moving platform M
+Par.I=3.5e5;                 % The moment of inertia of the MP
+Par.rho=0.215;               % The limb's density (Kg/m
+Par.F_old=zeros(4,1);        % Initial guess for redundancy resolution
+Par.x0=zeros(6,1);           % The initial condition for x
+Par.xp0=zeros(6,1);          % The initial condition for xdot
+Par.time=0;
+Par.index=0;
+Par.F=[1e3;1e3;1e3;1e3];
+Par.Fd=[0;0;0];
+Par.g=[0;0;-9.81];
+x0=Par.x0;
+x0(1)=1;x0(2)=1;
+xp0=Par.xp0;
+
+Par.g=[0;0;0];
+%
+%   The desired trajectory initial points
+%       Time    x       y       \phi
+Par.xd=[0       0       0       0
+        100     100    100     -pi/4
+        200     0       0       0
+        300     0       0       0
+        400     0       0       0
+        500     0       0       0
+        600     0       0       0
+        1000    0       0       0];
+    
+% Define Numeric Variables
+Ath=Par.Ath;      Bth=Par.Bth;      
+    
+% parameter perturbation
+M=Par.pert*Par.M;
+I=Par.pert*Par.I;
+rho=Par.pert*Par.rho;
+RA=Par.pert*Par.RA;
+RB=Par.pert*Par.RB;
+F=Par.F;
+Fd=Par.Fd;
+g=Par.g;
+A=[RA*cos(Ath) RA*sin(Ath)]';
+
+%%  
+t=t0:0.1:tf;
+n_time=max(size(t));
+for j=1:n_time,
+%----------------------------------------------------------------
+%   The desired trajectory of the end effector 
+%
+[iy(:,j), y(:,j),dy(:,j),d2y(:,j)]=TP_cubic(t(j));
+
+%% Find the rotation matrix
+%
+x=y(1:3,j);
+dx=dy(1:3,j);
+d2x=d2y(1:3,j);
+phi=x(3);
+dphi=dx(3);
+K=[0,0,1]';
+
+%%   Define control inputs
+Fd=zeros(3,1);            % No disturbance torque
+for i=1:4
+% Kinematics
+A(:,i)=RA*[cos(Ath(i)); sin(Ath(i))];
+E(:,i)=RB*[cos(Bth(i)+phi); sin(Bth(i)+phi)];
+X(i,1)=x(1)-A(1,i)+ E(1,i);
+Y(i,1)=x(2)-A(2,i)+ E(2,i);
+
+al(i,1)=atan2(Y(i),X(i));
+L(i,1)=sqrt(X(i)^2+Y(i)^2);
+S(1,i)=cos(al(i));
+S(2,i)=sin(al(i));
+SS(:,i)=[S(:,i);0];
+N(:,i)=cross(K,SS(:,i));
+gn(i)=dot(g,N(:,i));
+gs(i)=dot(g,SS(:,i));
+
+% Jacobians
+Jx(i,1)=S(1,i);
+Jx(i,2)=S(2,i);
+Jx(i,3)=E(1,i)*S(2,i)-E(2,i)*S(1,i);
+dL(i,1)=Jx(i,:)*dx;
+
+
+Ja(i,1)=-S(2,i);
+Ja(i,2)=S(1,i);
+Ja(i,3)=E(1,i)*S(1,i)+E(2,i)*S(2,i);
+dal(i,1)=Ja(i,:)*dx/L(i);
+% Accelerations
+d2L(i,1)=Jx(i,:)*d2x- ... 
+    dx(3)^2*(E(1,i)*S(1,i)+E(2,i)*S(2,i))+ dal(i)^2*L(i);
+ 
+d2al(i,1)=1/L(i)*(Ja(i,:)*d2x - ...
+    (E(2,i)*S(1,i)-E(1,i)*S(2,i))*dx(3)^2 - 2*dL(i)*dal(i));
+%%
+% Variable mass treatment 
+% Reacting forces 
+Fn(i,1)= rho*(1/3*d2al(i)*L(i)^2+2*L(i)*dL(i)*dal(i)-L(i)*gn(i));
+Fs(i,1)= rho*(L(i)*d2L(i)-(dal(i)*L(i))^2-L(i)*gs(i));
+end
+%
+%% Newton-Euler equations for moving platform
+%
+V(1,1)=M*(d2x(1)-g(1));
+V(2,1)=M*(d2x(2)-g(2));
+V(3,1)=I*d2x(3);
+for i=1:4
+V(1,1)= V(1,1)+ Fs(i)*S(1,i)-Fn(i)*S(2,i);
+V(2,1)= V(2,1)+ Fs(i)*S(2,i)+Fn(i)*S(1,i);
+V(3,1)= V(3,1)+ Fs(i)*(E(2,i)*S(1,i)-E(1,i)*S(2,i)) - ...
+                    Fn(i)*(E(1,i)*S(1,i)+E(2,i)*S(2,i));
+end
+
+CF(:,j)=V;
+JF(:,j)=pinv(Jx')*CF(:,j);
+end
+
+
+%% Comparison to constant mass approach
+%
+t1=t;CF1=CF;JF1=JF;
+load CM_traj1        % The simulation result
+
+
+figure(1)
+subplot(311)
+plot(t,y(1,:)),grid on
+xlabel('time(sec)')
+ylabel('x_G m')
+title('Tracking Performance')
+legend('Desired Trajectory')
+subplot(312)
+plot(t,y(2,:)),grid on
+xlabel('time(sec)')
+ylabel('y_G m')
+subplot(313)
+plot(t,y(3,:)*180/pi),grid on
+xlabel('time(sec)')
+ylabel('\phi degrees')
+
+
+figure(2)
+subplot(221)
+plot(t,JF(1,:),'--',t1,JF1(1,:)), grid on
+title('Actuator Force 1');
+xlabel('time(sec)')
+ylabel('Forces (N)')
+legend('Constant Mass', 'Variable Mass', 'Location', 'Best')
+ 
+subplot(222)
+plot(t,JF(2,:),'--',t1,JF1(2,:)), grid on
+title('Actuator Force 2');
+xlabel('time(sec)')
+ylabel('Forces (N)')
+subplot(223)
+plot(t,JF(3,:),'--',t1,JF1(3,:)), grid on
+title('Actuator Force 3');
+xlabel('time(sec)')
+ylabel('Forces (N)')
+subplot(224)
+plot(t,JF(4,:),'--',t1,JF1(4,:)), grid on
+title('Actuator Force 4');
+xlabel('time(sec)')
+ylabel('Forces (N)')
+
+figure(3)
+subplot(311)
+plot(t,CF(1,:),'--',t1,CF1(1,:)), grid on
+xlabel('time(sec)')
+ylabel('Forces')
+legend('Constant Mass', 'Variable Mass', 'Location', 'Best')
+
+title('Cartesian Forces F_x');
+subplot(312)
+plot(t,CF(2,:),'--',t1,CF1(2,:)), grid on
+xlabel('time(sec)')
+ylabel('Forces')
+%legend('Fdy', 'IDC_y', 'PID_y', 'F_y')
+title('Cartesian Forces F_y');
+subplot(313)
+plot(t,CF(3,:),'--',t1,CF1(3,:)), grid on
+xlabel('time(sec)')
+ylabel('Forces')
+title('Cartesian Forces \tau_\phi');
+%legend('Fd', 'PD','Location', 'NorthWest')
