@@ -1,4 +1,60 @@
-# Robotics 
+# Robotics
+
+This repository contains code and resources related to two robotics books.
+
+## Books
+
+### 1. An Introduction to Robotics
+**Authors:** Prof. Hamid D. Taghirad & Mohammad A. Khosravi  
+**Copyright:** ARAS @2023
+
+This book provides a comprehensive introduction to robotics concepts and techniques.
+
+### 2. Parallel Robots: Mechanics and Control (1st ed.)
+**Author:** H.D. Taghirad  
+**Copyright:** CRC Press, 2013  
+**DOI:** [10.1201/b16096](https://doi.org/10.1201/b16096)
+
+A detailed exploration of parallel robots, their mechanics, and control.
+
+## Code and Resources
+
+Explore the code and resources related to these books:
+
+- [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=https://github.com/aras-labs/Robotics&project=MY_REPO.prj)
+  - Open in MATLAB Online
+
+- [![Open In Colab](https://img.shields.io/badge/Open%20In%20Colab-Click%20Here-blue?logo=google-colab)](https://colab.research.google.com/drive/1RLI0E4KVbwhQEDLm5wO2awykG96ra8PE?usp=sharing)
+  - Open in Google Colab
+
+## Contributing
+
+We welcome contributions to this repository. If you'd like to contribute:
+
+1. Fork the repository.
+
+2. Create a new branch for your feature or bug fix.
+
+3. Make your changes and commit them.
+
+4. Create a pull request.
+
+## Issues
+
+If you encounter any issues or have questions, please open an issue on the GitHub repository.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Repository
+
+Explore the code and resources for these books in the GitHub repository:
+
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue.svg)](https://github.com/aras-labs/Robotics/)
+
+Feel free to use this repository for your robotics projects and research.
+
 
 An Introduction To Robotics Book
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=https://github.com/aras-labs/Robotics&project=MY_REPO.prj) [![Open In Colab](https://img.shields.io/badge/Open%20In%20Colab-Click%20Here-blue?logo=google-colab)](https://colab.research.google.com/drive/1RLI0E4KVbwhQEDLm5wO2awykG96ra8PE?usp=sharing)
