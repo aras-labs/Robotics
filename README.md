@@ -1014,14 +1014,11 @@ An Introduction To Robotics Book
         </tbody>
     </table>
 </div>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
+
+## Citation
+
+If you find this repository useful in your research or work, please consider citing the following resources:
+
+1. H.D. Taghirad. (2013). Parallel Robots: Mechanics and Control (1st ed.). CRC Press. [https://doi.org/10.1201/b16096](https://doi.org/10.1201/b16096)
+
+2. Repository for Robotics Code: [https://github.com/aras-labs/Robotics/](https://github.com/aras-labs/Robotics/)
