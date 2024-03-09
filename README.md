@@ -1,51 +1,63 @@
-# Robotics
+# Robotics 🤖
 
-This repository contains code and resources related to two robotics books.
+![GitHub stars](https://img.shields.io/github/stars/aras-labs/Robotics?style=social) ![GitHub forks](https://img.shields.io/github/forks/aras-labs/Robotics?style=social) ![GitHub issues](https://img.shields.io/github/issues/aras-labs/Robotics)
 
-## Books
+This repository contains code and resources related to two pivotal robotics books. Dive into the world of robotics through the expert lens of seasoned authors.
+
+## 📚 Books
 
 ### 1. An Introduction to Robotics
-**Authors:** Prof. Hamid D. Taghirad & Mohammad A. Khosravi  
-**Copyright:** ARAS @2023
+- **Authors:** Prof. Hamid D. Taghirad & Mohammad A. Khosravi
+- **Copyright:** ARAS @ 2023
 
-This book provides a comprehensive introduction to robotics concepts and techniques.
+A comprehensive introduction to the fascinating world of robotics, covering essential concepts and techniques.
 
-### 2. Parallel Robots: Mechanics and Control 
-**Author:** Prof. Hamid D. Taghirad
-**Copyright:** CRC Press, 2013  
-**DOI:** [10.1201/b16096](https://doi.org/10.1201/b16096)
+### 2. Parallel Robots: Mechanics and Control
+- **Author:** Prof. Hamid D. Taghirad
+- **Copyright:** CRC Press, 2013
+- **DOI:** [10.1201/b16096](https://doi.org/10.1201/b16096)
 
-A detailed exploration of parallel robots, their mechanics, and control.
+A detailed exploration into the mechanics and control of parallel robots, unveiling complex dynamics and innovative control strategies.
 
-## Code and Resources
+## 🖥️ Code and Resources
 
-Explore the code and resources related to these books:
+Harness the power of these books with the following tools:
 
-- [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=https://github.com/aras-labs/Robotics&project=MY_REPO.prj)
-  - Open in MATLAB Online
+- [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=https://github.com/aras-labs/Robotics&project=MY_REPO.prj) - Open in MATLAB Online
+- [![Open In Colab](https://img.shields.io/badge/Open%20In%20Colab-Click%20Here-blue?logo=google-colab)](https://colab.research.google.com/drive/1RLI0E4KVbwhQEDLm5wO2awykG96ra8PE?usp=sharing) - Open in Google Colab
 
-- [![Open In Colab](https://img.shields.io/badge/Open%20In%20Colab-Click%20Here-blue?logo=google-colab)](https://colab.research.google.com/drive/1RLI0E4KVbwhQEDLm5wO2awykG96ra8PE?usp=sharing)
-  - Open in Google Colab
+## 👨‍💻 Contributing
 
-## Contributing
-
-We welcome contributions to this repository. If you'd like to contribute:
+We welcome contributions! If you're interested in enhancing this repository:
 
 1. Fork the repository.
+2. Create a new branch (`feature/your_feature` or `bugfix/your_bugfix`).
+3. Implement your changes.
+4. Commit and push to your branch.
+5. Submit a pull request.
 
-2. Create a new branch for your feature or bug fix.
+## 🐛 Issues
 
-3. Make your changes and commit them.
+Encountered an issue or have a question? Open an issue on our [GitHub repository](https://github.com/aras-labs/Robotics/issues).
 
-4. Create a pull request.
+## 📜 License
 
-## Issues
+This project is licensed under the [MIT License](LICENSE) - feel free to use and modify as per your needs.
 
-If you encounter any issues or have questions, please open an issue on the GitHub repository.
+## 🌍 Repository
 
-## License
+Check out the repository for detailed code and resources:
 
-This project is licensed under the [MIT License](LICENSE).
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue.svg)](https://github.com/aras-labs/Robotics/)
+
+Leverage this repository for your robotics projects and research endeavors.
+
+## 📑 Citation
+
+If you find this repository useful in your research or work, please cite:
+
+1. H.D. Taghirad (2013). Parallel Robots: Mechanics and Control (1st ed.). CRC Press. [DOI: 10.1201/b16096](https://doi.org/10.1201/b16096)
+2. Repository for Robotics Code: [https://github.com/aras-labs/Robotics/](https://github.com/aras-labs/Robotics/)
 
 ## Repository
 
@@ -1070,11 +1082,3 @@ An Introduction To Robotics Book
         </tbody>
     </table>
 </div>
-
-## Citation
-
-If you find this repository useful in your research or work, please consider citing the following resources:
-
-1. H.D. Taghirad. (2013). Parallel Robots: Mechanics and Control (1st ed.). CRC Press. [https://doi.org/10.1201/b16096](https://doi.org/10.1201/b16096)
-
-2. Repository for Robotics Code: [https://github.com/aras-labs/Robotics/](https://github.com/aras-labs/Robotics/)
