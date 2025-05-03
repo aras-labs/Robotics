@@ -1,6 +1,7 @@
 # Robotics 🤖
 
 ![GitHub stars](https://img.shields.io/github/stars/aras-labs/Robotics?style=social) ![GitHub forks](https://img.shields.io/github/forks/aras-labs/Robotics?style=social) ![GitHub issues](https://img.shields.io/github/issues/aras-labs/Robotics)
+![mjahmadee](https://img.shields.io/badge/GitHub-mjahmadee-blue?logo=github)
 
 This repository contains code and resources related to two pivotal robotics books. Dive into the world of robotics through the expert lens of seasoned authors.
 
